@@ -22,7 +22,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      user_type: {
+      userType: {
         type: Sequelize.INTEGER,
         Comment:"1: admin 2: user"
       },
