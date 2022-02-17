@@ -3,11 +3,34 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "seq": "sequelize",
+    "start": "nodemon app.js",
+    "migrate": "sequelize db:migrate",
+    "postinstall": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "~routes": "routes",
+    "~controllers": "controllers",
+    "~models": "models",
+    "~validations": "validations",
+    "~utility": "utility"
+  },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "link-module-alias": "^1.2.0",
     "nodemailer": "^6.7.2",
-    "sequelize": "^6.15.0"
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.15.0",
+    "sequelize-cli": "^6.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
