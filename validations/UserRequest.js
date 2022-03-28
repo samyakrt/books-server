@@ -2,7 +2,7 @@ const { body } = require('express-validator');
 const { User } = require('~models');
 
 module.exports = [
-    body('name').notEmpty(),
+    body('name').notEmpty('name is required'),
     body('email').notEmpty().isEmail().custom(async (email) => {
         if (!email) {
             return;

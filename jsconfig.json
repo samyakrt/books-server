@@ -6,7 +6,8 @@
             "~controllers/*": ["./controllers/*"],
             "~models": ["./models"],
             "~validations/*": ["./validations/*"],
-            "~utility/*": ["./utility/*"]
+            "~utility/*": ["./utility/*"],
+            "~middleware/*": ["./middleware/*"]
         }
     },
     "exclude": ["node_modules"]
