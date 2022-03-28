@@ -1,6 +1,7 @@
-const errorMiddleware = (req,res,next,error) =>  {
+const errorMiddleware = (error,req,res,next) =>  {
+
     return res.status(500).json({
-        error
+        error: `something went wrong`
     })
 }
 

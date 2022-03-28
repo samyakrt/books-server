@@ -11,14 +11,13 @@ class AuthorController {
                 authors
             })
         } catch (error) {
-            console.log(error)
             return res.status(500).json({
                 error: `Something went wrong!`
             })
         }
     }
 
-    static async addBook(req,res) {
+    static async addBook(req,res,next) {
         try {
             const { author } = req.params;
             const bookAuthor = await Author.findOne({
@@ -26,15 +25,18 @@ class AuthorController {
                     id: author
                 }
             })
-            const { name,isbn,price,addedBy } = req.body;
-
+            
+            const { name,isbn,price } = req.body;
             const book = {
-                name,isbn,price,
+                name,
+                isbn,
+                price,
+                addedBy: req.user.id
             }
             
             await bookAuthor.createBook(book)
             return res.json({
-                message:'hello'
+                message:'book added successfully.'
             })
         } catch (error) {
             next(error)

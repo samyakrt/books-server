@@ -11,12 +11,13 @@ const AuthMiddleware = (req,res,next) => {
             message: `Unauthorized`
         })
     }
-    jwt.verify(token,secret,(error) => {
+    jwt.verify(token,secret,(error,decoded) => {
         if(error) {
             return res.status(401).json({
                 message: 'Unauthorized'
             })
         }
+        req.user = decoded.payload.user
     })
     next()
 
