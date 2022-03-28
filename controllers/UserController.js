@@ -44,10 +44,9 @@ class UserController {
                 });
             }
             
-            const { name } = user;
             const token = jwt.sign({
                 payload: {
-                    name
+                    user
                 }
             },app_secret,{
                 expiresIn: process.env.EXPIRES_IN
