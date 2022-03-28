@@ -1,0 +1,24 @@
+POST http://localhost:4000/api/v1/login
+Content-Type: application/json
+
+{
+    "email": "tuladharsamyak@gmail.com",
+    "password": "password"
+}
+
+###
+GET http://localhost:4000/api/v1/authors
+Content-Type: application/json
+X-TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7Im5hbWUiOiJuaWNrIn0sImlhdCI6MTY0ODM1MDIxNSwiZXhwIjoxNjQ4Mzg2MjE1fQ.1mIuMLhZcRbGtM71d2B716aHyAmAnmShjLx8RBA_EO4
+
+###
+POST http://localhost:4000/api/v1/authors/1/books
+Content-Type: application/json
+X-TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7Im5hbWUiOiJuaWNrIn0sImlhdCI6MTY0ODM1MDIxNSwiZXhwIjoxNjQ4Mzg2MjE1fQ.1mIuMLhZcRbGtM71d2B716aHyAmAnmShjLx8RBA_EO4
+
+{
+    "name": "laravel",
+    "isbn": "132465",
+    "price":"12.69",
+    "addedBy": 1
+}
