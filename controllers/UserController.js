@@ -1,6 +1,5 @@
 const { User } = require('~models');
 const jwt = require('jsonwebtoken');
-const { response } = require('express');
 const { comparePassword } = require('~utility/password');
 const app_secret = process.env.SECRET_KEY
 class UserController {
