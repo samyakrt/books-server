@@ -1,8 +1,9 @@
 const { Author, Book } = require('~models');
+const Pagination  =require('~controllers/abstracts/Pagination')
 
-class AuthorController {
+class AuthorController extends Pagination {
 
-    static async index(req, res, next) {
+     async index(req, res, next) {
         try {
             const authors = await Author.findAll({
                 include: Book
@@ -17,7 +18,7 @@ class AuthorController {
         }
     }
 
-    static async addBook(req, res, next) {
+     async addBook(req, res, next) {
         try {
             const { author } = req.params;
             const bookAuthor = await Author.findOne({
@@ -43,8 +44,9 @@ class AuthorController {
         }
     }
 
-    static async showAuthorBooks(req, res, next) {
+    async showAuthorBooks(req, res, next) {
         try {
+
             const { author: id } = req.params;
             const author = await Author.findOne({
                 where: {
@@ -58,17 +60,27 @@ class AuthorController {
                 })
             }
 
+            let { page,per_page,search} = req.query;
+
+            if(!page) {
+                page = 1
+            }
+
+            if(!per_page) {
+                per_page = 5
+            }
+
+
             const author_books = await Book.findAndCountAll({
-                limit: 5,
-                offset: 5,
+                limit: per_page,
+                offset: (new Number(page) - 1) * new Number(per_page),
                 where: {
                     authorId: id
                 }
             });
 
-            return res.status(200).json({
-                author_books
-            })
+            const response = this.paginationResponse(author_books,page,per_page,author_books?.total_items)
+            return res.status(200).json(response)
         } catch (error) {
             next(error)
         }

@@ -18,10 +18,16 @@ class UserController {
         }
     }
 
-    generateToken(payload) {
-        return 
+    generateToken(user) {
+        return jwt.sign({
+            payload: {
+                user
+            }
+        },app_secret,{
+            expiresIn: process.env.EXPIRES_IN
+        })
     }
-    async login(req,res) {
+     async login(req,res) {
 
         const { email,password } = req.body;
         try {
@@ -42,14 +48,7 @@ class UserController {
                     message: 'invalid email or password'
                 });
             }
-            
-            const token = jwt.sign({
-                payload: {
-                    user
-                }
-            },app_secret,{
-                expiresIn: process.env.EXPIRES_IN
-            })
+            const token = this.generateToken(user)
 
             return res.json({
                 token
@@ -64,4 +63,4 @@ class UserController {
 
 }
 
-module.exports = new UserController
+module.exports = UserController
